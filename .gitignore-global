@@ -1,0 +1,6 @@
+#ignore backup files
+*~
+
+#ignore linked_list
+linked_list
+
