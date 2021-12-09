@@ -1,0 +1,13 @@
+#include "node.h"
+#include<iostream>
+
+using namespace std;
+
+node::node(){
+}
+
+node::node(double val){
+}
+
+
+

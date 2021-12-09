@@ -1,0 +1,61 @@
+#include "list.h"
+#include<iostream>
+
+using namespace std;
+
+list::list(){
+  length = 0;
+  head = NULL;
+  tail = NULL;
+}
+
+void list::add(double val){
+  length++;
+  iter = new node(val);
+  iter->right = head;
+  head->left = iter;
+  head = iter;
+}
+
+double list::pop(){
+  double pop = head->value;
+  remove(head);
+  return pop;
+}
+
+double list::top(){
+  return head->value;
+}
+
+bool list::find(double val){
+  return true;
+}
+
+void list::remove(node * rem){
+  if(rem->left != NULL){
+    rem->left->right = rem->right;
+  }else{
+    rem->right->left = NULL;
+  }
+  if(rem->right != NULL){
+    rem->right->left = rem->left;
+  }else{
+    rem->left->right = NULL;
+  }
+  delete rem;
+  
+}
+
+void list::printTo(){
+  string str = to_string(head->value);
+  iter = head;
+  while(iter->right != NULL){
+    str = str + ", " + to_string(iter->right->value);
+    iter = iter->right;
+  }
+  cout<< str + "\n"; 
+}
+
+list::~list(){
+
+}

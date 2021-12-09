@@ -1,0 +1,22 @@
+#ifndef LIST_H
+#define LIST_H
+
+#include "node.h"
+
+class list{
+  int length;
+  node * iter;
+  node * head;
+  node * tail;
+ public:
+  list();
+  void add(double val);
+  double pop();
+  double top();
+  bool find(double val);
+  void remove(node * rem);
+  void printTo();
+  ~list();
+};
+
+#endif

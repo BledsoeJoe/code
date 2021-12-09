@@ -1,0 +1,29 @@
+#include "window.h"
+#include "video.h"
+#include<iostream>
+
+using namespace std;
+
+int main(){
+  //prompt for size of test screen
+  int size;
+  cout<<"Enter test video screen size: ";
+  cin>>size;
+
+  //create video instance
+  video vid = video(1, 50, 50);
+  
+  //temporary pointer for window creation
+  window * temp_win;
+  //create the windows and load them with test frames
+  for(int i = 0; i < 50; i++){
+    temp_win = new window(size, size);
+    temp_win->set_pixel(i,i,'x');
+    vid.addFrame(*temp_win);
+  }
+
+  vid.play();
+  system("clear");
+
+
+}
