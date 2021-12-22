@@ -1,0 +1,12 @@
+#ifndef PRIMES_H
+#define PRIMES_H
+
+#include <vector>
+
+class primes{
+  std::vector<int> set;
+
+
+};
+
+#endif

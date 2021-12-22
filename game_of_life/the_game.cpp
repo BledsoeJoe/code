@@ -1,5 +1,6 @@
 #include "video.h"
 #include "the_game.h"
+#include<stdlib.h>
 #include<iostream>
 
 using namespace std;
@@ -13,17 +14,33 @@ void copy_ar(){
   }
 }
 
-//function to translate cells configuration to window
-void add_frame(){
-  for(int i=0; i<size; i++){
-    for(int j=0; j<size; j++){
-      if(cells[i*size+j] == 1){
-        win.add_pixel(i,j, 'o');
-      }else{
-        win.add_pixel(i,j, ' ');
+void config(){
+  srand (rando); //set rand seed
+  
+  for(int i = 0; i < size; i++){
+    for(int j = 0; j < size; j++){
+      if(rand() % 2){
+	cells_next[i*size+j] = 1;
       }
     }
   }
+  //copy_ar();
+  add_frame();
+}
+	
+
+//function to translate cells configuration to window and add to video
+void add_frame(){
+  for(int i=0; i<size; i++){
+    for(int j=0; j<size; j++){
+      if(cells_next[i*size+j] == 1){
+        win->set_pixel(i,j, 'o');
+      }else{
+        win->set_pixel(i,j, ' ');
+      }
+    }
+  }
+  vid->addFrame(*win);
 }
 
 void alive(int neighbors, int i, int j){
@@ -38,6 +55,7 @@ void alive(int neighbors, int i, int j){
 
 
 void cycle(){
+  copy_ar();
   //useful indicies for the four corners
   int ind = size -1;
   int ind_ = size -2;
@@ -89,8 +107,10 @@ void cycle(){
     }
   }
 
+  //add the current frame of this cycle to the video
+  add_frame();
   //set the cells array to the cells next array
-  copy_ar();
+  //copy_ar();
 }
   
 
@@ -100,6 +120,16 @@ int main(){
   //prompt user for size of life board
   cout<<"Enter dimension size of game board: ";
   cin>>size;
+
+  int num_frames;
+
+  //prompt user for number of frames
+  cout<<"Enter the number of frames of life: ";
+  cin>>num_frames;
+
+  //prompt user for random number to begin configuration
+  cout<<"Enter a seemingly random number to configure board: ";
+  cin>>rando;
 
   //create video object to hold frames
   vid = new video(1,size, size);
@@ -116,7 +146,16 @@ int main(){
       cells[i*size+j] = 0;
       cells_next[i*size+j] = 0;
     }
-  }  
+  }
+
+  config();
+
+
+  for(int i = 1; i < num_frames; i++){
+    cycle();
+  }
+
+  vid->play();
 
   
   return 0;

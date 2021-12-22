@@ -6,15 +6,19 @@
 
 int size;
 
-video vid;
+int rando;
 
-window win;
+video * vid;
+
+window * win;
 
 int * cells;
 
 int * cells_next;
 
 void copy_ar();
+
+void config();
 
 void add_frame();
 

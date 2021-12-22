@@ -28,6 +28,7 @@ void video::play(bool replay){
     for(int i = 0; i < frames.size(); i++){
       system("clear");
       frames[i].print_window();
+      cout<<"frame: "<<i<<" out of "<<frames.size();
       this_thread::sleep_for(chrono::milliseconds(1000/fps));
     }
     system("clear");
