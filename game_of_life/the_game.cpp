@@ -31,6 +31,9 @@ void config(){
 
 //function to translate cells configuration to window and add to video
 void add_frame(){
+  //create new window instance to pass new window to video
+  win = new window(size,size);
+  
   for(int i=0; i<size; i++){
     for(int j=0; j<size; j++){
       if(cells_next[i*size+j] == 1){
@@ -133,8 +136,7 @@ int main(){
 
   //create video object to hold frames
   vid = new video(1,size, size);
-  //create window object and load initial pixels
-  win = new window(size, size);
+  
   //create 2-D array to hold cell values
   cells = new int[size*size];
   //2-D array to hold next iterations cells
