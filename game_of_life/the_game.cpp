@@ -130,12 +130,18 @@ int main(){
   cout<<"Enter the number of frames of life: ";
   cin>>num_frames;
 
+  int fps;
+  
+  //prompt user for frames per second
+  cout<<"Enter the desired frames per second: ";
+  cin>>fps;
+
   //prompt user for random number to begin configuration
   cout<<"Enter a seemingly random number to configure board: ";
   cin>>rando;
 
   //create video object to hold frames
-  vid = new video(1,size, size);
+  vid = new video(fps,size, size);
   
   //create 2-D array to hold cell values
   cells = new int[size*size];
